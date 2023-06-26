@@ -1,3 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+    .title {
+        @apply text-[36px] leading-[54px] font-bold;
+    }
+    .border-input {
+        @apply rounded-lg border-[1px] border-[#A5A8B1] py-2 pl-4;
+    }
+}
+
+:where(.css-dev-only-do-not-override-1wazalj).ant-pagination .ant-pagination-item-active {
+    border-color: #ff993c;
+}
+
+:where(.css-dev-only-do-not-override-1wazalj).ant-pagination .ant-pagination-item-active a {
+    color: #ff993c;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #1e0d03;
+    font-size: 16px;
+}

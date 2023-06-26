@@ -23,7 +23,7 @@
 //     Filler
 // )
 
-// export function LineChart() {
+// export default function LineChart() {
 //     const options = {
 //         responsive: true,
 //         plugins: {

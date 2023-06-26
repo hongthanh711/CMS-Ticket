@@ -1,6 +1,6 @@
 import DatePicker from '../../component/datePicker/DatePicker'
 import { DoughnutChart } from './modules/doughnutChart/DoughnutChart'
-// import { LineChart } from './modules/lineChart/LineChart'
+import LineChart from './modules/lineChart/LineChart'
 
 export default function Home() {
     const dataDoghnutChart1 = {
@@ -28,7 +28,7 @@ export default function Home() {
         <>
             <h1 className="title">Thống kê</h1>
             <DatePicker />
-            {/* <LineChart /> */}
+            <LineChart />
             <div className="flex gap-[100px]">
                 <div>Datepicker</div>
                 <div className="w-60">

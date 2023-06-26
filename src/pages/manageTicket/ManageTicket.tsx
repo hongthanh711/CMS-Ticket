@@ -38,12 +38,15 @@ export default function ManageTicket() {
     const handleToggleModal = () => {
         setIsOpenModal(!isOpenModal)
     }
+    const handleChange = (value: string) => {
+        console.log(value)
+    }
 
     return (
         <>
             <h1 className="title">Danh sách vé</h1>
             <div className="flex items-center justify-between">
-                <Search placehoder="Tìm bằng số vé" />
+                <Search handleChange={handleChange} placehoder="Tìm bằng số vé" />
                 <div className="flex gap-2">
                     <Button onClick={handleToggleModal} title="Lọc vé" icon={<IconFilter />} />
                     <div className={isLoading ? 'pointer-events-none' : undefined}>

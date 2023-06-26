@@ -2,23 +2,34 @@ import { Checkbox, Col, Modal, Radio, RadioChangeEvent, Row } from 'antd'
 import Button from '../../../component/button/Button'
 import { CheckboxValueType } from 'antd/es/checkbox/Group'
 import { useState } from 'react'
+import DatePicker from '../../../component/datePicker/DatePicker'
 
 type Props = {
     open: boolean
     handleToggleModal: () => void
 }
 
+type ConditionFilter = {
+    startDate: string
+    endDate: string
+    statusUse: string
+    gate: CheckboxValueType[]
+}
+
 export default function ModalManageTicket({ open, handleToggleModal }: Props) {
-    const [valueRadio, setValueRadio] = useState<string>('all')
-    const [valueCheckox, setValueCheckbox] = useState<CheckboxValueType[]>(['all'])
+    const [conditionFilter, setConditionFilter] = useState<ConditionFilter>({
+        startDate: '',
+        endDate: '',
+        statusUse: 'all',
+        gate: ['all'],
+    })
 
     const onChangeRadio = (e: RadioChangeEvent) => {
-        setValueRadio(e.target.value)
+        setConditionFilter({ ...conditionFilter, statusUse: e.target.value })
     }
 
     const onChangeCheckbox = (checkedValues: CheckboxValueType[]) => {
-        console.log('checked = ', checkedValues)
-        setValueCheckbox(checkedValues)
+        setConditionFilter({ ...conditionFilter, gate: checkedValues })
     }
 
     return (
@@ -30,13 +41,17 @@ export default function ModalManageTicket({ open, handleToggleModal }: Props) {
                         <div className="font-semibold opacity-80 leading-[26px] text-[16px]">
                             Từ ngày
                         </div>
-                        <div>DatePicker</div>
+                        <div>
+                            <DatePicker />
+                        </div>
                     </div>
                     <div>
                         <div className="font-semibold opacity-80 leading-[26px] text-[16px]">
                             Đến ngày
                         </div>
-                        <div>DatePicker</div>
+                        <div>
+                            <DatePicker />
+                        </div>
                     </div>
                 </div>
                 <div>
@@ -44,7 +59,7 @@ export default function ModalManageTicket({ open, handleToggleModal }: Props) {
                         Tình trạng sử dụng
                     </p>
                     <div>
-                        <Radio.Group value={valueRadio} onChange={onChangeRadio}>
+                        <Radio.Group value={conditionFilter.statusUse} onChange={onChangeRadio}>
                             <Radio value={'all'}>Tất cả</Radio>
                             <Radio value={'used'}>Đã sử dụng</Radio>
                             <Radio value={'notUsed'}>Chưa sử dụng</Radio>
@@ -59,7 +74,7 @@ export default function ModalManageTicket({ open, handleToggleModal }: Props) {
                     <Checkbox.Group
                         style={{ width: '100%' }}
                         onChange={onChangeCheckbox}
-                        defaultValue={valueCheckox}
+                        defaultValue={conditionFilter.gate}
                     >
                         <Row>
                             <Col span={8}>

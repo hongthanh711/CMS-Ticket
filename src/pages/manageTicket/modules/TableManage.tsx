@@ -8,7 +8,7 @@ const columns: ColumnsType<TicketType> = [
     {
         title: 'STT',
         key: 'stt',
-        width: 60,
+        width: 70,
         align: 'center',
         render: (_, __, index) => <p>{index + 1}</p>,
     },
@@ -80,6 +80,7 @@ type Props = {
 const TableManage = ({ ticketList, loading }: Props) => {
     return (
         <Table
+            rowClassName={(_, index) => (index % 2 === 0 ? 'table-row-light' : 'table-row-dark')}
             columns={columns}
             dataSource={ticketList}
             pagination={{ position: ['bottomCenter'] }}

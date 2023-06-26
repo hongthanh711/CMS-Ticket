@@ -2,6 +2,9 @@ import DatePicker from '../../component/datePicker/DatePicker'
 import { DoughnutChart } from './modules/doughnutChart/DoughnutChart'
 import LineChart from './modules/lineChart/LineChart'
 
+import dayjs from 'dayjs'
+import 'dayjs/locale/vi'
+
 export default function Home() {
     const dataDoghnutChart1 = {
         labels: [],
@@ -24,8 +27,11 @@ export default function Home() {
             },
         ],
     }
+
+    const currentDate = dayjs()
+    console.log(currentDate.format('dddd, DD MMMM YYYY')) // Kết quả: "Thứ Ba,
     return (
-        <>
+        <div className="bg-white w-full h-full rounded-3xl p-6 mt-5">
             <h1 className="title">Thống kê</h1>
             <DatePicker />
             <LineChart />
@@ -50,6 +56,6 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     )
 }

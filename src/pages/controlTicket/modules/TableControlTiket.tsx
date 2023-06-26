@@ -6,7 +6,7 @@ const columns: ColumnsType<ControlTicketType> = [
     {
         title: 'STT',
         key: 'stt',
-        width: 60,
+        width: 70,
         align: 'center',
         render: (_, __, index) => <p>{index + 1}</p>,
     },

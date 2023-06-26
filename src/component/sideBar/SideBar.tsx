@@ -30,7 +30,7 @@ const sideBarData: sideBarType[] = [
 export default function SideBar() {
     return (
         <div className="fixed top-0 bottom-0">
-            <div>
+            <div className="mt-7">
                 <div className="w-32">
                     <img src={logo} alt="logo" />
                 </div>
@@ -69,8 +69,10 @@ export default function SideBar() {
                         )
                     })}
                 </div>
-                <p className="text-sm opacity-80 absolute bottom-7">Copyright 2020 Alta Software</p>
             </div>
+            <p className="text-sm opacity-80 absolute bottom-7 bg-bgColor">
+                Copyright 2020 Alta Software
+            </p>
         </div>
     )
 }

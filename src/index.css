@@ -13,6 +13,13 @@
     }
 }
 
+body {
+    font-family: 'Montserrat', sans-serif;
+    color: #1e0d03;
+    font-size: 16px;
+}
+
+/* custom table */
 :where(.css-dev-only-do-not-override-1wazalj).ant-pagination .ant-pagination-item-active {
     border-color: #ff993c;
 }
@@ -21,8 +28,16 @@
     color: #ff993c;
 }
 
-body {
-    font-family: 'Montserrat', sans-serif;
-    color: #1e0d03;
+.table-row-light {
+    background-color: #ffffff;
+}
+.table-row-dark {
+    background-color: rgba(247, 248, 251, 1);
+}
+
+:where(.css-dev-only-do-not-override-1wazalj).ant-table-wrapper .ant-table-thead > tr > th,
+:where(.css-dev-only-do-not-override-1wazalj).ant-table-wrapper .ant-table-thead > tr > td {
+    background-color: rgba(241, 244, 248, 1);
     font-size: 16px;
 }
+/**/

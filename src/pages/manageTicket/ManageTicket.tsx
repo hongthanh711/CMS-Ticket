@@ -12,6 +12,8 @@ import TableManage from './modules/TableManage'
 export default function ManageTicket() {
     const [ticketList, setTicketList] = useState<TicketType[] | []>([])
     const [isOpenModal, setIsOpenModal] = useState<boolean>(false)
+    const [keyword, setKeyword] = useState<string>('')
+    const [dataFilter, setDataFilter] = useState<TicketType[] | []>([])
 
     const [isLoading, setIsLoading] = useState<boolean>(true)
 
@@ -35,18 +37,32 @@ export default function ManageTicket() {
         }
     }, [])
 
+    useEffect(() => {
+        if (keyword === '') {
+            setDataFilter(ticketList)
+        } else {
+            const curr = [
+                ...ticketList.filter((ticket) => {
+                    return ticket.ticketCode.toLowerCase().includes(keyword.toLocaleLowerCase())
+                }),
+            ]
+            setDataFilter(curr)
+        }
+    }, [keyword, ticketList])
+
     const handleToggleModal = () => {
         setIsOpenModal(!isOpenModal)
     }
-    const handleChange = (value: string) => {
-        console.log(value)
+
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setKeyword(e.target.value)
     }
 
     return (
-        <>
+        <div className="bg-white w-full h-full rounded-3xl p-6 mt-5">
             <h1 className="title">Danh sách vé</h1>
             <div className="flex items-center justify-between">
-                <Search handleChange={handleChange} placehoder="Tìm bằng số vé" />
+                <Search onChange={handleChange} placehoder="Tìm bằng số vé" />
                 <div className="flex gap-2">
                     <Button onClick={handleToggleModal} title="Lọc vé" icon={<IconFilter />} />
                     <div className={isLoading ? 'pointer-events-none' : undefined}>
@@ -57,9 +73,9 @@ export default function ManageTicket() {
                 </div>
             </div>
             <div className="mt-5">
-                <TableManage loading={isLoading} ticketList={ticketList} />
+                <TableManage loading={isLoading} ticketList={dataFilter} />
             </div>
             <ModalManageTicket open={isOpenModal} handleToggleModal={handleToggleModal} />
-        </>
+        </div>
     )
 }

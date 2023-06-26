@@ -12,6 +12,8 @@ export default function Setting() {
     const [isOpenModalAdd, setIsOpenModalAdd] = useState<boolean>(false)
     const [packageTicket, setPackageTicket] = useState<TicketPackageType[] | []>([])
     const [isLoading, setIsLoading] = useState<boolean>(true)
+    const [keyword, setKeyword] = useState<string>('')
+    const [dataFilter, setDataFilter] = useState<TicketPackageType[] | []>([])
 
     useEffect(() => {
         const unb = onSnapshot(packageTicketColection, (snapshot) => {
@@ -34,19 +36,32 @@ export default function Setting() {
         }
     }, [])
 
+    useEffect(() => {
+        if (keyword === '') {
+            setDataFilter(packageTicket)
+        } else {
+            const curr = [
+                ...packageTicket.filter((ticket) => {
+                    return ticket.typeTicketCode.toLowerCase().includes(keyword.toLocaleLowerCase())
+                }),
+            ]
+            setDataFilter(curr)
+        }
+    }, [keyword, packageTicket])
+
     const handleToggleModalAdd = () => {
         setIsOpenModalAdd(!isOpenModalAdd)
     }
 
-    const handleChange = (value: string) => {
-        console.log(value)
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setKeyword(e.target.value)
     }
 
     return (
-        <div>
+        <div className="bg-white w-full h-full rounded-3xl p-6 mt-5">
             <h1 className="title">Danh sách gói vé</h1>
             <div className="flex items-center justify-between">
-                <Search handleChange={handleChange} placehoder="Tìm bằng số vé" />
+                <Search onChange={handleChange} placehoder="Tìm bằng số vé" />
                 <div className="flex gap-2">
                     <div className={isLoading ? 'pointer-events-none' : undefined}>
                         <CSVLink
@@ -65,7 +80,7 @@ export default function Setting() {
                 </div>
             </div>
             <div className="mt-5">
-                <TablePackage data={packageTicket} loading={isLoading} />
+                <TablePackage data={dataFilter} loading={isLoading} />
             </div>
             <ModalSetting open={isOpenModalAdd} handleToggleModal={handleToggleModalAdd} />
         </div>

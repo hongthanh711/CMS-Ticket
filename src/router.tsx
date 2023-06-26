@@ -1,10 +1,10 @@
 import { createBrowserRouter } from 'react-router-dom'
-import Home from './pages/home/Home'
 import MainLayout from './layout/mainLayout'
 import ManageTicket from './pages/manageTicket/ManageTicket'
 import Setting from './pages/setting/Setting'
 import ControlTicket from './pages/controlTicket/ControlTicket'
 import PAGE_ROUTE from './constants/pageRoute'
+import Home from './pages/home/Home'
 
 export const router = createBrowserRouter([
     {
